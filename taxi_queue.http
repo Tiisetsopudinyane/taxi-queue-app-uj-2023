@@ -1,4 +1,4 @@
-POST http://localhost:4015/with-api/api/passenger/join
+POST https://taxi-queue-qgy0.onrender.com/with-api/api/passenger/join
 content-type:application/json
 
 {
@@ -6,7 +6,7 @@ content-type:application/json
 }
 ###
 
-POST http://localhost:4015/with-api/api/passenger/leave
+POST https://taxi-queue-qgy0.onrender.com/with-api/passenger/leave
 content-type:application/json
 
 {
@@ -15,7 +15,7 @@ content-type:application/json
 
 ###
 
-POST http://localhost:4015/with-api/api/taxi/join
+POST https://taxi-queue-qgy0.onrender.com/with-api/api/taxi/join
 content-type:application/json
 
 {
@@ -23,9 +23,10 @@ content-type:application/json
 }
 
 ###
-POST http://localhost:4015/with-api/api/taxi/depart
+POST https://taxi-queue-qgy0.onrender.com/with-api/api/taxi/depart
 content-type:application/json
 
 {
-    "taxi_queue_count":-1
+    "taxi_queue_count":-1,
+    "passenger_queue_count":-12
 }
