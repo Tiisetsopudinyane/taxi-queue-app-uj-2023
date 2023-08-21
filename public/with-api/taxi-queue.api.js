@@ -4,57 +4,73 @@ document.addEventListener('alpine:init', () => {
 
 		return {
 			version: 'api-1.0',
-			queueLength : 0,
+			queuecounter: 0,
+			taxiCounter:0,
+			message:'',
 			init() {
+					this.queueLength(),
+					this.taxiQueueLength()
+				
+			},
+			joinQueue() {
 				axios
-					.get('/api/passenger/queue')
-					.then(result => {
-						// an example API call
-						this.queueLength = result.data.queueCount
-					});
+				.post('/api/passenger/join')
+				.then(result => {
+					this.message = result.data.message;
+				});
+				    this.queueLength(),
+					this.taxiQueueLength()
+				
+			},
+			leaveQueue() {
+				axios
+				.post('/api/passenger/leave')
+				.then(result => {
+					this.message = result.data.message;
+				});
+				    this.queueLength(),
+					this.taxiQueueLength()
+				
+			},
+
+			joinTaxiQueue() {
+				axios
+				.post('/api/taxi/join')
+				.then(result => {
+					this.message = result.data.message;
+				});
+				    this.queueLength(),
+					this.taxiQueueLength()
+				
+			},
+
+			queueLength() {
+				axios
+				.get('/api/passenger/queue')
+				.then(result => {
+					this.queuecounter = result.data.queueCount;
+				});
+			},
+
+			taxiQueueLength() {
+				axios
+				.get('/api/taxi/queue')
+				.then(result => {
+					this.taxiCounter = result.data.queueCount;
+				});
+			},
+
+			taxiDepart() {
+				axios
+				.post('/api/taxi/depart')
+				.then(result =>{
+					this.message=result.data.message;
+				});
+				    this.queueLength(),
+					this.taxiQueueLength()
 			}
 		}
-
 	});
 
-
-	function TaxiQueue() {
-
-
-		function joinQueue() {
-	
-		}
-	
-		function leaveQueue() {
-	
-		}
-	
-		function joinTaxiQueue() {
-	
-		}
-	
-		function queueLength() {
-	
-		}
-	
-		function taxiQueueLength() {
-	
-		}
-	
-		function taxiDepart(){
-	
-		}
-	
-		return {
-			joinQueue,
-			leaveQueue,
-			joinTaxiQueue,
-			queueLength,
-			taxiQueueLength,
-			taxiDepart
-		}
-	}
-
 });
-
 
