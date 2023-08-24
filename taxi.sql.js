@@ -31,9 +31,15 @@ export async function joinQueue() {
 
 export async function leaveQueue() {
     let passenger=1;
-    PassengerCount=PassengerCount-passenger;
+    
+       if(PassengerCount===0){
+        return;
+       }
+       else{
+        PassengerCount=PassengerCount-passenger;
         const sql=`update taxi_queue set passenger_queue_count=${PassengerCount} where id=1`
         return await db.run(sql);
+       }
 }
 
 export async function joinTaxiQueue() {
